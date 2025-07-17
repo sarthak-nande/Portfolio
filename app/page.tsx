@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   ArrowRight,
@@ -13,44 +13,51 @@ import {
   Briefcase,
   Award,
   Star,
-  Sparkles,
-} from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ContactForm } from "@/components/contact-form"
-import { ProjectsSection } from "@/components/projects-section"
-import { useEffect, useState } from "react"
+  Sparkles
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ContactForm } from "@/components/contact-form";
+import { ProjectsSection } from "@/components/projects-section";
+import { useEffect, useState } from "react";
 
 export default function Portfolio() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    setIsVisible(true)
+    setIsVisible(true);
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const skills = [
-    { name: "JavaScript", level: 90, icon: "⚡" },
+    { name: "JavaScript", level: 90, icon: "🟨" }, // Yellow box (JS color)
+    { name: "Java", level: 90, icon: "☕" }, // Coffee (official Java icon)
     { name: "Python", level: 85, icon: "🐍" },
-    { name: "Java", level: 80, icon: "☕" },
-    { name: "C#", level: 75, icon: "🔷" },
-    { name: "React", level: 90, icon: "⚛️" },
-    { name: "Node.js", level: 85, icon: "🟢" },
-    { name: "HTML/CSS", level: 95, icon: "🎨" },
-    { name: "Data Structures", level: 80, icon: "🏗️" },
-    { name: "UI/UX Design", level: 75, icon: "🎭" },
-    { name: "Graphic Design", level: 70, icon: "🖌️" },
-  ]
+    { name: "Spring Boot", level: 80, icon: "🌱" }, // Seedling (Spring)
+    { name: "React", level: 90, icon: "⚛️" }, // Atom (React logo)
+    { name: "Node.js", level: 85, icon: "🟢" }, // Green circle (Node.js color)
+    { name: "HTML/CSS", level: 95, icon: "🧱" }, // Brick (structure/layout)
+    { name: "MySQL", level: 80, icon: "🐬" }, // Dolphin (MySQL official logo)
+    { name: "MongoDB", level: 80, icon: "🍃" }, // Leaf (MongoDB logo)
+    { name: "Data Structures", level: 80, icon: "🧩" }, // Puzzle (building block logic)
+    { name: "UI/UX Design", level: 75, icon: "🎨" }, // Palette (design)
+  ];
 
   const experiences = [
     {
@@ -59,37 +66,31 @@ export default function Portfolio() {
       organization: "SKN Sinhgad College of Engineering",
       location: "Pandharpur",
       period: "2021 - 2025",
-      description: "Pursuing Bachelor's degree with focus on software development and data structures.",
+      description:
+        "Completed Bachelor's degree with focus on software development and data structures.",
       icon: <GraduationCap className="h-5 w-5" />,
     },
     {
       type: "work",
-      title: "Frontend Developer Intern",
-      organization: "Tech Solutions Inc.",
+      title: "Intern",
+      organization: "Cognizant Technology Solution",
       location: "Remote",
-      period: "Jun 2023 - Aug 2023",
-      description: "Developed responsive web applications using React and collaborated with design team.",
+      period: "March 2025 - July 2025",
+      description:
+        "Worked On The Technologies Such As Spring Boot, MySQL, React.js, Spring Security, Spring MVC, PL/SQL, SOLID Principle, Git & GitHub",
       icon: <Briefcase className="h-5 w-5" />,
     },
     {
       type: "education",
       title: "Higher Secondary Education",
-      organization: "ABC Junior College",
-      location: "Pandharpur",
+      organization: "Pemraj Sarda College",
+      location: "Ahilyanagar",
       period: "2019 - 2021",
-      description: "Completed with distinction in Science stream with Mathematics and Computer Science.",
+      description:
+        "Completed with distinction in Science stream with Mathematics and Computer Science.",
       icon: <GraduationCap className="h-5 w-5" />,
     },
-    {
-      type: "achievement",
-      title: "Hackathon Winner",
-      organization: "CodeFest 2023",
-      location: "Mumbai",
-      period: "Mar 2023",
-      description: "First place in web development category for innovative e-learning platform.",
-      icon: <Award className="h-5 w-5" />,
-    },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gray-900 transition-colors duration-300 relative overflow-hidden">
@@ -126,7 +127,9 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div
-              className={`flex items-center space-x-2 transition-all duration-500 ${isVisible ? "animate-fade-in-left" : "opacity-0"}`}
+              className={`flex items-center space-x-2 transition-all duration-500 ${
+                isVisible ? "animate-fade-in-left" : "opacity-0"
+              }`}
             >
               <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center animate-pulse-slow hover:animate-wiggle cursor-pointer">
                 <span className="text-white font-bold text-sm">SN</span>
@@ -136,19 +139,21 @@ export default function Portfolio() {
               </span>
             </div>
             <div className="hidden md:flex space-x-8">
-              {["Home", "About", "Experience", "Projects", "Contact"].map((item, index) => (
-                <Link
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-300 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-down relative group"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              ))}
+              {["Home", "About", "Experience", "Projects", "Contact"].map(
+                (item, index) => (
+                  <Link
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="text-gray-300 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-down relative group"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                )
+              )}
             </div>
-            <Button className="bg-purple-600 hover:bg-purple-700 transition-all duration-200 hover:scale-105 text-white animate-glow hover:animate-shake">
+            <Button onClick={() => document.getElementById("contact")?.scrollIntoView({behavior : "smooth"})} className="bg-purple-600 hover:bg-purple-700 transition-all duration-200 hover:scale-105 text-white animate-glow hover:animate-shake">
               <Sparkles className="h-4 w-4 mr-2 animate-wiggle" />
               Hire Me
             </Button>
@@ -157,19 +162,29 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+      <section
+        id="home"
+        className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 xl:gap-12 items-center min-h-[600px]">
             <div
-              className={`space-y-6 lg:space-y-8 transition-all duration-1000 ${isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"}`}
+              className={`space-y-6 lg:space-y-8 transition-all duration-1000 ${
+                isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
+              }`}
             >
               <div className="space-y-4">
-                
+                <Badge
+                  variant="outline"
+                  className="text-purple-400 border-purple-400 animate-bounce-slow hover:animate-wiggle cursor-pointer"
+                >
                   <Star className="h-3 w-3 mr-1 animate-spin-slow" />
                   Computer Science Student
-               
+                </Badge>
                 <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-                  <span className="animate-typewriter inline-block">Building Digital</span>
+                  <span className="animate-typewriter inline-block">
+                    Building Digital
+                  </span>
                   <br />
                   <span className="text-purple-400"> Experiences</span>
                 </h1>
@@ -177,14 +192,16 @@ export default function Portfolio() {
                   className="text-xl text-gray-300 leading-relaxed animate-fade-in-up"
                   style={{ animationDelay: "0.5s" }}
                 >
-                  Passionate developer crafting innovative web solutions with modern technologies. Specializing in
-                  full-stack development and user-centered design.
+                  Passionate developer crafting innovative web solutions with
+                  modern technologies. Specializing in full-stack development
+                  and user-centered design.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4">
                 <Button
                   size="lg"
+                  onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior : "smooth"})}
                   className="bg-purple-600 hover:bg-purple-700 transition-all duration-200 hover:scale-105 hover:shadow-lg text-white animate-glow group"
                 >
                   <Sparkles className="h-4 w-4 mr-2 animate-wiggle" />
@@ -193,6 +210,7 @@ export default function Portfolio() {
                 </Button>
                 <Button
                   size="lg"
+                  onClick={() => window.open("/sarthak_nande_resume.pdf", "_blank")}
                   variant="outline"
                   className="hover:scale-105 transition-all duration-200 bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white group hover-lift"
                 >
@@ -203,8 +221,8 @@ export default function Portfolio() {
 
               <div className="flex space-x-6">
                 {[
-                  { number: "15+", label: "Projects", delay: "0.2s" },
-                  { number: "3+", label: "Years Learning", delay: "0.4s" },
+                  { number: "8+", label: "Projects", delay: "0.2s" },
+                  { number: "4+", label: "Years Learning", delay: "0.4s" },
                   { number: "10+", label: "Technologies", delay: "0.6s" },
                 ].map((stat, index) => (
                   <div
@@ -222,7 +240,9 @@ export default function Portfolio() {
             </div>
 
             <div
-              className={`relative transition-all duration-1000 delay-300 flex items-center justify-center ${isVisible ? "animate-fade-in-right" : "opacity-0 translate-x-10"}`}
+              className={`relative transition-all duration-1000 delay-300 flex items-center justify-center ${
+                isVisible ? "animate-fade-in-right" : "opacity-0 translate-x-10"
+              }`}
             >
               <div className="relative w-72 h-72 xl:w-80 xl:h-80 group">
                 <div className="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse-slow group-hover:opacity-30 transition-opacity duration-300"></div>
@@ -261,7 +281,9 @@ export default function Portfolio() {
               <Sparkles className="inline h-8 w-8 mr-2 animate-wiggle" />
               Technical Skills
             </h2>
-            <p className="text-xl text-gray-300">Technologies I work with to bring ideas to life</p>
+            <p className="text-xl text-gray-300">
+              Technologies I work with to bring ideas to life
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -272,7 +294,9 @@ export default function Portfolio() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6">
-                  <div className="text-2xl mb-2 animate-float group-hover:animate-wiggle">{skill.icon}</div>
+                  <div className="text-2xl mb-2 animate-float group-hover:animate-wiggle">
+                    {skill.icon}
+                  </div>
                   <div className="w-12 h-12 bg-purple-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:rotate-12 animate-glow">
                     <Code className="h-6 w-6 text-white animate-pulse-slow" />
                   </div>
@@ -288,7 +312,9 @@ export default function Portfolio() {
                       }}
                     ></div>
                   </div>
-                  <span className="text-xs text-gray-400 animate-fade-in-up">{skill.level}%</span>
+                  <span className="text-xs text-gray-400 animate-fade-in-up">
+                    {skill.level}%
+                  </span>
                 </CardContent>
               </Card>
             ))}
@@ -307,23 +333,26 @@ export default function Portfolio() {
               </h2>
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p className="animate-fade-in-up hover:text-white transition-colors duration-300 cursor-default">
-                  👋 Hi there! I'm Sarthak Nande, a passionate Computer Science and Engineering student at SKN Sinhgad
-                  College of Engineering, Pandharpur. 🎓
+                  👋 Hi there! I'm Sarthak Nande, a passionate Computer Science
+                  and Engineering student at SKN Sinhgad College of Engineering,
+                  Pandharpur. 🎓
                 </p>
                 <p
                   className="animate-fade-in-up hover:text-white transition-colors duration-300 cursor-default"
                   style={{ animationDelay: "0.2s" }}
                 >
-                  🌐 In the web development realm, I'm well-versed in HTML, CSS, and JavaScript. I'm also comfortable
-                  with technologies like Node.js and React, which I use to craft dynamic and user-friendly web
-                  applications.
+                  🌐 In the web development realm, I'm well-versed in HTML, CSS,
+                  and JavaScript. I'm also comfortable with technologies like
+                  Node.js and React, which I use to craft dynamic and
+                  user-friendly web applications.
                 </p>
                 <p
                   className="animate-fade-in-up hover:text-white transition-colors duration-300 cursor-default"
                   style={{ animationDelay: "0.4s" }}
                 >
-                  🚀 Beyond coding, I'm a curious learner and a team player, always ready to collaborate on exciting
-                  projects. Let's connect and explore opportunities in the tech world!
+                  🚀 Beyond coding, I'm a curious learner and a team player,
+                  always ready to collaborate on exciting projects. Let's
+                  connect and explore opportunities in the tech world!
                 </p>
               </div>
 
@@ -353,7 +382,9 @@ export default function Portfolio() {
                   <h3 className="font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
                     Backend Development
                   </h3>
-                  <p className="text-sm text-gray-300">Node.js, Python, Java, Database Design</p>
+                  <p className="text-sm text-gray-300">
+                    Node.js, Spring Boot, Fast API, Java, Python, Database Design
+                  </p>
                 </CardContent>
               </Card>
 
@@ -366,7 +397,9 @@ export default function Portfolio() {
                   <h3 className="font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
                     Frontend Development
                   </h3>
-                  <p className="text-sm text-gray-300">React, JavaScript, HTML/CSS, UI/UX</p>
+                  <p className="text-sm text-gray-300">
+                    React, JavaScript, HTML/CSS, UI/UX
+                  </p>
                 </CardContent>
               </Card>
 
@@ -379,7 +412,9 @@ export default function Portfolio() {
                   <h3 className="font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
                     Full-Stack Expertise
                   </h3>
-                  <p className="text-sm text-gray-300">End-to-end application development with modern technologies</p>
+                  <p className="text-sm text-gray-300">
+                    End-to-end application development with modern technologies
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -388,14 +423,19 @@ export default function Portfolio() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 transition-colors duration-300">
+      <section
+        id="experience"
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 transition-colors duration-300"
+      >
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               <Award className="inline h-8 w-8 mr-2 animate-wiggle" />
               Experience & Education
             </h2>
-            <p className="text-xl text-gray-300">My journey in technology and learning</p>
+            <p className="text-xl text-gray-300">
+              My journey in technology and learning
+            </p>
           </div>
 
           <div className="relative">
@@ -415,8 +455,8 @@ export default function Portfolio() {
                       exp.type === "education"
                         ? "bg-purple-600"
                         : exp.type === "work"
-                          ? "bg-purple-700"
-                          : "bg-purple-500"
+                        ? "bg-purple-700"
+                        : "bg-purple-500"
                     }   cursor-pointer group-hover:scale-110 transition-transform duration-300`}
                   >
                     {exp.icon}
@@ -463,7 +503,10 @@ export default function Portfolio() {
       <ProjectsSection />
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 transition-colors duration-300">
+      <section
+        id="contact"
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 transition-colors duration-300"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -471,7 +514,8 @@ export default function Portfolio() {
               Let's Work Together
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Ready to bring your ideas to life? Let's discuss your next project.
+              Ready to bring your ideas to life? Let's discuss your next
+              project.
             </p>
           </div>
 
@@ -480,12 +524,24 @@ export default function Portfolio() {
             <div className="space-y-6 animate-fade-in-left">
               <div className="grid gap-6">
                 {[
-                  { icon: Mail, title: "Email", info: "sarthak@example.com", color: "text-purple-400", delay: "0s" },
-                  { icon: Phone, title: "Phone", info: "+91 12345 67890", color: "text-purple-500", delay: "0.2s" },
+                  {
+                    icon: Mail,
+                    title: "Email",
+                    info: "sarthaknande19@gmail.com",
+                    color: "text-purple-400",
+                    delay: "0s",
+                  },
+                  {
+                    icon: Phone,
+                    title: "Phone",
+                    info: "+91 9021271962",
+                    color: "text-purple-500",
+                    delay: "0.2s",
+                  },
                   {
                     icon: MapPin,
                     title: "Location",
-                    info: "Pandharpur, India",
+                    info: "Ahilyanagar, India",
                     color: "text-purple-600",
                     delay: "0.4s",
                   },
@@ -523,16 +579,18 @@ export default function Portfolio() {
       <footer className="bg-gray-950 text-white py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="max-w-7xl mx-auto text-center animate-fade-in-up">
           <div className="flex justify-center space-x-6 mb-4">
-            {["GitHub", "LinkedIn", "Behance", "Twitter"].map((social, index) => (
-              <Link
-                key={social}
-                href="#"
-                className="text-gray-400 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-up hover:animate-wiggle"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {social}
-              </Link>
-            ))}
+            {["GitHub", "LinkedIn", "Behance", "Twitter"].map(
+              (social, index) => (
+                <Link
+                  key={social}
+                  href="#"
+                  className="text-gray-400 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-up hover:animate-wiggle"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {social}
+                </Link>
+              )
+            )}
           </div>
           <p className="text-gray-400 hover:text-gray-300 transition-colors duration-300 cursor-default">
             © 2025 Sarthak Nande. All rights reserved.
@@ -541,5 +599,5 @@ export default function Portfolio() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

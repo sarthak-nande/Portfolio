@@ -14,7 +14,8 @@ interface Project {
   longDescription: string
   tech: string[]
   category: string
-  image: string
+  video?: string
+  image?: string
   demoUrl?: string
   githubUrl?: string
   featured: boolean
@@ -23,78 +24,40 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Full-stack web application with React and Node.js",
+    title: "Real Estate CRM",
+    description: "Full-stack web application with Spring Boot & Thymleaf",
     longDescription:
-      "A comprehensive e-commerce platform built with modern technologies. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
+      "A comprehensive Real Estate CRM platform built with modern web technologies. The system includes features such as user authentication, property listings management, lead tracking, appointment scheduling, integrated messaging, and an admin dashboard for analytics and agent performance monitoring. Designed to streamline the workflow for real estate agents and enhance the experience for property buyers and sellers.",
+    tech: ["Spring Boot", "Thymleaf", "MySQL", "Spring Security"],
     category: "Full Stack",
-    image: "/placeholder.svg?height=200&width=300",
-    demoUrl: "https://demo.example.com",
-    githubUrl: "https://github.com/sarthak/ecommerce",
+    video: "https://res.cloudinary.com/dur46xyvo/video/upload/v1752736393/Screen_Recording_2025-07-17_123615_bskhea.mp4",
+    demoUrl: "https://realestatecrm-c5mb.onrender.com/",
+    githubUrl: "https://github.com/sarthak-nande/realestatecrm",
     featured: true,
   },
   {
     id: 2,
-    title: "Data Visualization Dashboard",
-    description: "Interactive dashboard for data analysis using Python",
+    title: "Interactive Learning Platform",
+    description: "Interactive Platform To Learn New Coding Languges, Enroll Course/Path",
     longDescription:
-      "A powerful data visualization dashboard that helps businesses analyze their data with interactive charts, real-time updates, and customizable widgets.",
-    tech: ["Python", "Flask", "D3.js", "PostgreSQL", "Chart.js"],
-    category: "Data Science",
-    image: "/placeholder.svg?height=200&width=300",
-    demoUrl: "https://dashboard.example.com",
-    githubUrl: "https://github.com/sarthak/dashboard",
+      "An interactive learning platform built with modern web technologies to enhance personalized education. Features include user authentication, real-time collaborative coding environments, AI-powered assessments, video lessons, quizzes, progress tracking, and a dynamic dashboard for learners and instructors. The platform supports multiple domains, enabling users to learn at their own pace while receiving intelligent feedback and mentorship.",
+    tech: ["Node.js", "React.js", "Redux.js", "MongoDB", "JWT"],
+    category: "FullStack",
+    video: "https://res.cloudinary.com/dur46xyvo/video/upload/v1750425691/interactive_learning_platform_oe3tn0.mp4",
+    githubUrl: "https://github.com/sarthak-nande/interactive-learning-platfrom",
     featured: true,
   },
   {
     id: 3,
-    title: "Mobile Task Manager",
+    title: "E-Gate Pass",
     description: "Cross-platform mobile app for productivity",
     longDescription:
-      "A feature-rich task management application with offline support, push notifications, team collaboration, and advanced scheduling capabilities.",
-    tech: ["React Native", "Firebase", "Redux", "AsyncStorage"],
+      "A secure and scalable E-Gate Pass Management System developed to streamline gate pass approvals within educational institutions. The platform supports multi-level approvals involving students, teachers, guardians, HODs, hostel rectors, and security personnel. Key features include role-based access control, real-time status tracking, notification system, and a mobile-friendly interface to manage gate pass requests efficiently and securely.",
+    tech: ["React Native", "Node.js", "Redux", "AsyncStorage", "MongoDB", "JWT"],
     category: "Mobile",
-    image: "/placeholder.svg?height=200&width=300",
-    demoUrl: "https://taskapp.example.com",
-    githubUrl: "https://github.com/sarthak/taskmanager",
+    video: "https://res.cloudinary.com/dur46xyvo/video/upload/v1750423949/y9lve76kemrwrq8mllzh.mp4",
+    githubUrl: "https://github.com/sarthak-nande/E-GetPass",
     featured: true,
-  },
-  {
-    id: 4,
-    title: "Weather Forecast App",
-    description: "Real-time weather application with location services",
-    longDescription:
-      "A beautiful weather application that provides accurate forecasts, weather maps, and location-based alerts with a clean, intuitive interface.",
-    tech: ["JavaScript", "OpenWeather API", "CSS3", "Geolocation"],
-    category: "Frontend",
-    image: "/placeholder.svg?height=200&width=300",
-    githubUrl: "https://github.com/sarthak/weather-app",
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "Blog Management System",
-    description: "Content management system for bloggers",
-    longDescription:
-      "A comprehensive CMS with rich text editor, media management, SEO optimization, and multi-author support for professional blogging.",
-    tech: ["PHP", "MySQL", "Bootstrap", "TinyMCE"],
-    category: "Full Stack",
-    image: "/placeholder.svg?height=200&width=300",
-    githubUrl: "https://github.com/sarthak/blog-cms",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Machine Learning Classifier",
-    description: "Image classification using deep learning",
-    longDescription:
-      "An advanced image classification system using convolutional neural networks to identify and categorize images with high accuracy.",
-    tech: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
-    category: "AI/ML",
-    image: "/placeholder.svg?height=200&width=300",
-    githubUrl: "https://github.com/sarthak/ml-classifier",
-    featured: false,
   },
 ]
 
@@ -104,6 +67,7 @@ export function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [showAll, setShowAll] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const filteredProjects = projects.filter(
     (project) => selectedCategory === "All" || project.category === selectedCategory,
@@ -177,15 +141,29 @@ export function ProjectsSection() {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className={`relative overflow-hidden ${viewMode === "list" ? "w-1/3" : ""}`}>
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  width={300}
-                  height={200}
-                  className={`object-cover group-hover:scale-110 transition-transform duration-500 animate-float ${
-                    viewMode === "list" ? "h-full" : "w-full h-48"
-                  }`}
-                />
+                {project.video ? (
+                  <video
+                    src={project.video}
+                    className={`object-cover group-hover:scale-110 transition-transform duration-500 animate-float ${
+                      viewMode === "list" ? "h-full" : "w-full h-48"
+                    }`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    width={300}
+                    height={200}
+                    className={`object-cover group-hover:scale-110 transition-transform duration-500 animate-float ${
+                      viewMode === "list" ? "h-full" : "w-full h-48"
+                    }`}
+                  />
+                )}
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 {/* Overlay buttons */}
@@ -213,10 +191,6 @@ export function ProjectsSection() {
                     </Button>
                   )}
                 </div>
-
-                {project.featured && (
-                  <Badge className="absolute top-2 left-2 bg-purple-600 text-white animate-pulse-slow">Featured</Badge>
-                )}
               </div>
 
               <div className={viewMode === "list" ? "flex-1" : ""}>
@@ -248,6 +222,7 @@ export function ProjectsSection() {
                   {viewMode === "grid" && (
                     <Button
                       variant="outline"
+                      onClick={() => setSelectedProject(project)}
                       className="w-full group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 bg-transparent hover:scale-105 border-gray-500 text-gray-300"
                     >
                       View Details
@@ -259,6 +234,72 @@ export function ProjectsSection() {
             </Card>
           ))}
         </div>
+
+        {selectedProject && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <Card className="max-w-2xl w-full bg-gray-800 border-gray-600">
+              <CardHeader>
+                <div className="flex justify-between items-start">
+                  <CardTitle className="text-2xl text-white">{selectedProject.title}</CardTitle>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSelectedProject(null)}
+                    className="text-gray-400 hover:text-white"
+                  >
+                    ✕
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {selectedProject.video ? (
+                  <video
+                    src={selectedProject.video}
+                    className="w-full h-48 object-cover rounded-lg mb-4"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                  />
+                ) : (
+                  <Image
+                    src={selectedProject.image || "/placeholder.svg"}
+                    alt={selectedProject.title}
+                    width={600}
+                    height={300}
+                    className="w-full h-48 object-cover rounded-lg mb-4"
+                  />
+                )}
+                <p className="text-gray-300 mb-4">{selectedProject.longDescription}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {selectedProject.tech.map((tech, index) => (
+                    <Badge key={index} variant="secondary" className="bg-gray-600 text-gray-300">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-4">
+                  {selectedProject.demoUrl && (
+                    <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                      <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Live Demo
+                      </a>
+                    </Button>
+                  )}
+                  {selectedProject.githubUrl && (
+                    <Button variant="outline" asChild className="border-gray-600 text-gray-300 bg-transparent">
+                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Github className="h-4 w-4 mr-2" />
+                        View Code
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Load More Button */}
         {filteredProjects.length > 6 && (
@@ -276,3 +317,4 @@ export function ProjectsSection() {
     </section>
   )
 }
+
