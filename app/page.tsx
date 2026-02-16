@@ -579,18 +579,23 @@ export default function Portfolio() {
       <footer className="bg-gray-950 text-white py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="max-w-7xl mx-auto text-center animate-fade-in-up">
           <div className="flex justify-center space-x-6 mb-4">
-            {["GitHub", "LinkedIn", "Behance", "Twitter"].map(
-              (social, index) => (
-                <Link
-                  key={social}
-                  href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-up hover:animate-wiggle"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {social}
-                </Link>
-              )
-            )}
+            {[
+              { name: "GitHub", href: "https://github.com/sarthak-nande" },
+              { name: "LinkedIn", href: "#" },
+              { name: "Behance", href: "#" },
+              { name: "Twitter", href: "#" }
+            ].map((social, index) => (
+              <Link
+                key={social.name}
+                href={social.href}
+                target={social.name === "GitHub" ? "_blank" : undefined}
+                rel={social.name === "GitHub" ? "noopener noreferrer" : undefined}
+                className="text-gray-400 hover:text-purple-400 transition-all duration-200 hover:scale-110 animate-fade-in-up hover:animate-wiggle"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {social.name}
+              </Link>
+            ))}
           </div>
           <p className="text-gray-400 hover:text-gray-300 transition-colors duration-300 cursor-default">
             © 2025 Sarthak Nande. All rights reserved.
